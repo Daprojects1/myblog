@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   width: 100vw;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: Arial,-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   
 }
@@ -39,10 +39,54 @@ color: rgb(26, 24, 24);
 background-color:rgb(218, 213, 213) ;
 }
 
-.toggleSwitch{
+/* .toggleSwitch{
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+} */
+
+.containerNav{
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.loggedInContainer{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: left .8s ease;
+}
+
+
+.loggedInContainer ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loggedInContainer li{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+
+.loggedInContainer svg{
+  cursor: pointer;
+}
+
+
+@media screen and (min-width:800px){
+  .mobileNav{
+    display: none;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

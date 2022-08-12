@@ -1,14 +1,15 @@
-import Container from '../components/Container'
+import Layout from '../components/Layout'
 import BgContext, { BgContextProvider } from '../Context/ColourContext'
 import '../styles/globals.css'
 import '../styles/login.css'
+import '../styles/homePage.css'
 
 function MyApp({ Component, pageProps }) {
   return (
     <BgContextProvider>
-        <Container >
+        <Layout>
          <Component {...pageProps} />
-        </Container>
+        </Layout>
     </BgContextProvider>
   )
 }

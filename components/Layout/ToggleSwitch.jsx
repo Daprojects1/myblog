@@ -5,7 +5,7 @@ import SunIcon from '../Svgs/SunIcon';
 import MoonIcon from '../Svgs/MoonIcon'
 import "react-toggle/style.css"
 
-const ToggleSwitch = ({ }) => {    
+const ToggleSwitch = () => {    
     // change so that it can be persisted from local storage instead. 
     const [mounted, setMounted] = useState(false)
 
@@ -24,8 +24,8 @@ const ToggleSwitch = ({ }) => {
             onChange={toggleChecked}
             icons={
                 {
-                    checked: <SunIcon />,
-                    unchecked:<MoonIcon/>
+                    checked: <SunIcon width='15'/>,
+                    unchecked:<MoonIcon width='15'/>
                 }
             }
         />
