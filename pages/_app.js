@@ -3,6 +3,7 @@ import BgContext, { BgContextProvider } from '../Context/ColourContext'
 import '../styles/globals.css'
 import '../styles/login.css'
 import '../styles/homePage.css'
+import '../styles/blogPost.css'
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,0 +1,47 @@
+.singleBlogPost{
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.singleBlogPost h2{
+    text-align: center;
+}
+
+.blogImage{
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+    height: 300px;
+}
+
+.blog-img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.blogText{
+    margin: 50px 0 0;
+    letter-spacing: 1.5px;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+.actionButtons{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.actionButtons button{
+    width: 30%;
+    max-width: 250px;
+    padding: 15px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    margin: 0;
+}

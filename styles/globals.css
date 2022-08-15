@@ -19,6 +19,7 @@ a {
 
 .containerBody{
   width: 80vw;
+  max-width: 1300px;
   height: 100%;
   margin: 0 auto;
 }
@@ -44,24 +45,52 @@ background-color:rgb(218, 213, 213) ;
   justify-content: flex-end;
 } */
 
-.containerNav{
-  display: flex;
+.mobileNav{
   margin-top: 30px;
+}
+
+/* Desktop Navigation */
+.desktopNav{
+  margin-top: 30px;
+  padding: 0 0 30px;
+}
+
+.desktopNavBody h2{
+  margin: 0;
+  font-weight: 300;
+  background: linear-gradient( rgb(79, 75, 172), rgb(95, 93, 147));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.desktopNavBody,.containerMobileNav{
+  display: flex;
   justify-content: space-between;
+}
+
+.desktopNavList{
+  display: flex;
+  gap: 30px;
+}
+
+.headerList{
+  display: flex;
+  gap: 75px;
+}
+
+.desktopNavList li{
+  cursor: pointer;
+  margin-top: auto;
 }
 
 .loggedInContainer{
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  transition: left .8s ease;
 }
 
-
+/* ULnav list */
 .loggedInContainer ul{
-  padding: 0;
-  margin: 0;
-  list-style: none;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -69,12 +98,18 @@ background-color:rgb(218, 213, 213) ;
   align-items: center;
 }
 
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
 .loggedInContainer li{
   width: 100%;
   text-align: center;
   padding-bottom: 30px;
   padding-top: 30px;
-  border-bottom: 1px solid black;
   cursor: pointer;
 }
 
@@ -85,6 +120,12 @@ background-color:rgb(218, 213, 213) ;
 
 @media screen and (min-width:800px){
   .mobileNav{
+    display: none;
+  }
+}
+
+@media screen and (max-width:799px){
+  .desktopNav{
     display: none;
   }
 }
