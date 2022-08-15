@@ -30,6 +30,7 @@ const data = [
   // }
 ]
 export default function Home() {
+  // if logged in, display public home, else personal home ?
   return (
     <HomePage data={data} />
   )
