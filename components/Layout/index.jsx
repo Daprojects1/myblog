@@ -1,19 +1,44 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import MobileNav from "../Navs/MobileNav";
 import DesktopNav from "../Navs/DesktopNav";
+import routesConfig from "../../utils/setRoutes";
 import { useRouter } from "next/router";
+import useAuthContext from "../../hooks/useAuthContext";
+import useLogout from "../../hooks/useLogout";
 
+const { handleNavList, setRoutes } = routesConfig;
 const Layout = ({ children }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [currentNav, setCurrentNav] = useState("Home");
-  const [isLoggedin, setIsLoggedIn] = useState(false);
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
+
+  const [currentNav, setCurrentNav] = useState(() => {
+    return setRoutes(handleNavList(user));
+  });
+
+  useEffect(() => {
+    // gets the currrent nav list when logged in or out.
+    const navList = handleNavList(user);
+    const currentNavObj = setRoutes(navList);
+    const NAV = navList?.find((n) => n.name === currentNavObj);
+    if (!NAV) {
+      router.push("/");
+      return;
+    }
+    setCurrentNav(NAV?.name);
+  }, [router, user]);
 
   const handleNavClick = () => {
     setOpen((prev) => !prev);
   };
 
   const handleChangeNav = (navName, path) => {
+    if (path === "/logout") {
+      logout();
+      router.push("/login");
+      return;
+    }
     if (currentNav !== navName) {
       setCurrentNav(navName);
       router.push(path);
@@ -26,17 +51,6 @@ const Layout = ({ children }) => {
 
   // Add news later
 
-  const loginNavList = [
-    { name: "Home", path: "/" },
-    { name: "Create A Blog", path: "" },
-    { name: "Profile", path: "" },
-    { name: "Logout", path: "" },
-  ];
-  const loggedOutNav = [
-    { name: "Home", path: "/" },
-    { name: "Login", path: "/login" },
-  ];
-
   return (
     <div className="containerBody">
       <MobileNav
@@ -44,12 +58,12 @@ const Layout = ({ children }) => {
         handleChangeNav={handleChangeNav}
         handleCloseNav={handleCloseNav}
         handleNavOpen={handleNavClick}
-        loginNavList={loggedOutNav}
+        navList={handleNavList(user)}
         currentNav={currentNav}
       />
       <DesktopNav
         handleChangeNav={handleChangeNav}
-        navList={loggedOutNav}
+        navList={handleNavList(user)}
         currentNav={currentNav}
       />
       {children}

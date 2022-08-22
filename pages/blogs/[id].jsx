@@ -1,7 +1,17 @@
+import { useState } from "react";
 import Appbutton from "../../reusableComps/Appbutton";
 import RenderIf from "../../reusableComps/RenderIf";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
+  const [openDeleteModal, setDeleteModal] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
+  const handleOpenEditModal = () => setOpen(true);
+  const handleCloseEditModal = () => setOpen(false);
+
+  const handleOpenDeleteModal = () => setOpen(true);
+  const handleCloseDeleteModal = () => setOpen(false);
+
   const handleEditBlog = () => {};
   const handleDeleteBlog = () => {};
   return (
@@ -35,8 +45,16 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
       </p>
       <RenderIf isTrue={loggedIn && isOwnPost}>
         <div className="actionButtons">
-          <Appbutton title="Edit" className={"appButton"} />
-          <Appbutton title="Delete" className={"appButton"} />
+          <Appbutton
+            title="Edit"
+            className={"appButton"}
+            onClick={handleEditBlog}
+          />
+          <Appbutton
+            title="Delete"
+            className={"appButton"}
+            onClick={handleDeleteBlog}
+          />
         </div>
       </RenderIf>
     </div>

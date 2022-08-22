@@ -12,7 +12,7 @@ const MobileNav = ({
   handleChangeNav,
   handleCloseNav,
   handleNavOpen,
-  loginNavList,
+  navList,
   currentNav,
 }) => {
   const { checked, toggleChecked } = useContext(BgContext);
@@ -37,7 +37,7 @@ const MobileNav = ({
             />
             <NavList
               checked={checked}
-              list={loginNavList}
+              list={navList}
               currentNav={currentNav}
               handleChangeNav={handleChangeNav}
             />

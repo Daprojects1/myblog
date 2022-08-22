@@ -1,37 +1,45 @@
 import { Formik, useFormik } from "formik";
 import Appbutton from "../../reusableComps/Appbutton";
 import Input from "../../reusableComps/Input";
+import Router, { useRouter } from "next/router";
 import * as Yup from "yup";
-import { useRouter } from "next/router";
+import useLogin from "../../hooks/useLogin";
+import { toast } from "react-toastify";
+import useAuthContext from "../../hooks/useAuthContext";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { signIn, loading, errors: loginErrors } = useLogin();
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    if (user) {
+      Router.push("/");
+    }
+  }, [user]);
   const initialValues = {
     username: "",
     password: "",
   };
+
   const formik = useFormik({
     initialValues,
-    onSubmit: (val) => {
-      console.log(val);
+    onSubmit: async (val) => {
+      const { username, password } = val;
+      try {
+        await signIn(username, password);
+      } catch (error) {
+        console.log(error);
+        toast.error(error);
+      }
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Please enter your username"),
-      password: Yup.string()
-        .required("Please enter your password")
-        .min(5, "Your password must be longer than 5 characters.")
-        .max(25, "your password must be less than 25 characters ")
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])/,
-          "Must Contain One Uppercase, One Lowercase"
-        )
-        .matches(
-          /^(?=.*[!@#\$%\^&\*])/,
-          "Must Contain One Special Case Character"
-        )
-        .matches(/^(?=.{6,20}$)\D*\d/, "Must Contain One Number"),
+      password: Yup.string().required("Please enter your password"),
     }),
   });
+
   const { handleBlur, handleChange, values, errors, touched, handleSubmit } =
     formik;
   const handleReRoute = (path) => {
@@ -73,6 +81,7 @@ const LoginPage = () => {
         className="appButton"
         title="Login"
         onClick={handleLogin}
+        disabled={loading}
       />
       <div className="createAccount">
         <p>Dont have an accout yet ?</p>
