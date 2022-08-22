@@ -16,6 +16,7 @@ const loginNavList = [
 const loggedOutNav = [
   { name: "Home", path: "/" },
   { name: "Login", path: "/login" },
+  { name: "Register", path: "/register" },
 ];
 
 const handleNavList = (user) => {

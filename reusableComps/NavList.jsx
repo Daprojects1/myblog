@@ -1,4 +1,5 @@
 import useStyles from "../utils/useStyles";
+import RenderIf from "./RenderIf";
 
 const NavList = ({
   isDesktop,
@@ -29,14 +30,15 @@ const NavList = ({
   return (
     <ul className={listClasses}>
       {list?.map((item, indx) => (
-        <li
-          style={
-            isDesktop ? desktopStyles(item?.name) : mobileStyles(item?.name)
-          }
-          key={indx}
-          onClick={() => handleChangeNav(item?.name, item?.path)}>
-          {item?.name}
-        </li>
+        <RenderIf key={indx} isTrue={item?.name !== "Register"}>
+          <li
+            style={
+              isDesktop ? desktopStyles(item?.name) : mobileStyles(item?.name)
+            }
+            onClick={() => handleChangeNav(item?.name, item?.path)}>
+            {item?.name}
+          </li>
+        </RenderIf>
       ))}
     </ul>
   );
