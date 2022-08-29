@@ -24,6 +24,7 @@ const blogDataReducer = (state, action) => {
         case 'GET__BLOG':
             // const singleBlog = allBlogs?.find(b => b?._id === id)
             // if (!singleBlog) return {...state, singleBlog:{}}
+            
             return {...state , singleBlog:action.payload}
         case 'PERSONAL__BLOGS':
             return { ...state, personalBlogs: action.payload }

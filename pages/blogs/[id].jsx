@@ -15,6 +15,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const { state } = useBlogDataContext(BlogDataContext);
 
   useEffect(() => {
+    // Need to first fix API so that if no result, not authorized, reroute home
     if (id) getSingleBlogA(id);
 
     if (Object?.entries(state?.singleBlog) === 0) {
@@ -55,6 +56,8 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
       </div>
       {/* STRING SPLIT TO DETECT LINE BREAK let separateLines = str.split(/\r?\n|\r|\n/g); */}
       <p className={`blogText`}>{message}</p>
+
+      {/* do a check if logged in and you are the current user, you can have other decisions. Will add on backend ?  */}
       <RenderIf isTrue={loggedIn && isOwnPost}>
         <div className="actionButtons">
           <Appbutton
