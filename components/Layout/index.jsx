@@ -3,8 +3,8 @@ import MobileNav from "../Navs/MobileNav";
 import DesktopNav from "../Navs/DesktopNav";
 import routesConfig from "../../utils/setRoutes";
 import { useRouter } from "next/router";
-import useAuthContext from "../../hooks/useAuthContext";
-import useLogout from "../../hooks/useLogout";
+import useAuthContext from "../../hooks/Auth/useAuthContext";
+import useLogout from "../../hooks/Auth/useLogout";
 
 const { handleNavList, setRoutes } = routesConfig;
 const Layout = ({ children }) => {
@@ -22,6 +22,11 @@ const Layout = ({ children }) => {
     const navList = handleNavList(user);
     const currentNavObj = setRoutes(navList);
     const NAV = navList?.find((n) => n.name === currentNavObj);
+    const acceptablePaths = ["/blogs/[id]", "/register"];
+    if (acceptablePaths.find((p) => p === router.pathname)) {
+      setCurrentNav("");
+      return;
+    }
     if (!NAV) {
       router.push("/");
       return;

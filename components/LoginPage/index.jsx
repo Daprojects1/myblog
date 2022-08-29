@@ -3,9 +3,9 @@ import Appbutton from "../../reusableComps/Appbutton";
 import Input from "../../reusableComps/Input";
 import Router, { useRouter } from "next/router";
 import * as Yup from "yup";
-import useLogin from "../../hooks/useLogin";
+import useLogin from "../../hooks/Auth/useLogin";
 import { toast } from "react-toastify";
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuthContext from "../../hooks/Auth/useAuthContext";
 import { useEffect } from "react";
 
 const LoginPage = () => {

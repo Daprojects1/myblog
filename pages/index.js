@@ -1,37 +1,31 @@
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
 import HomePage from "../components/HomePage"
+import { BlogDataContext } from "../Context/BlogDataContext"
+import useBlogDataContext from "../hooks/BlogData/useBlogDataContext"
+import useGetAllBlogs from "../hooks/BlogData/useGetAllBlogs"
 
 
-const data = [
-  {
-    title: `The new order of things in the new system. Jesus' reign has begun!`,
-    preview: 'There is a new way of life here as the thousand year reign begins! The days are going by quickly ...' ,
-    date: '02 Dec 20',
-    readTime: '5 mins read',
-    id:1
-  },
-  {
-    title: `The new order of things in the new system. Jesus' reign has begun!`,
-    preview: 'There is a new way of life here as the thousand year reign begins! The days are going by quickly ...' ,
-    date: '02 Dec 20',
-    readTime: '5 mins read',
-    id:2
-  },
-  // {
-  //   title: `The new order of things in the new system. Jesus' reign has begun!`,
-  //   preview: 'There is a new way of life here as the thousand year reign begins! The days are going by quickly ...' ,
-  //   date: '02 Dec 20',
-  //   readTime:'5 mins read'
-  // },
-  // {
-  //   title: `The new order of things in the new system. Jesus' reign has begun!`,
-  //   preview: 'There is a new way of life here as the thousand year reign begins! The days are going by quickly ...' ,
-  //   date: '02 Dec 20',
-  //   readTime:'5 mins read'
-  // }
-]
 export default function Home() {
-  // if logged in, display public home, else personal home ?
+
+  const { state } = useBlogDataContext(BlogDataContext)
+  
+  const { getAllBlogs, loading, error } = useGetAllBlogs()
+  
+  const getBlogs = async () => await getAllBlogs()
+  
+  useEffect(() => {
+    try {
+      getBlogs()
+    } catch (error) {
+      console.log(error)
+      toast.error('Sorry, something went wrong !')
+    }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  
   return (
-    <HomePage data={data} />
+    <HomePage data={state?.allBlogs} />
   )
 }

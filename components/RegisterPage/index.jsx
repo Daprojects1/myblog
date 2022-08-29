@@ -3,10 +3,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../reusableComps/Input";
 import Appbutton from "../../reusableComps/Appbutton";
-import useRegister from "../../hooks/useRegister";
+import useRegister from "../../hooks/Auth/useRegister";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuthContext from "../../hooks/Auth/useAuthContext";
 
 const RegisterPage = () => {
   const router = useRouter();

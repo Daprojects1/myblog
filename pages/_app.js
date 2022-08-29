@@ -7,9 +7,11 @@ import '../styles/login.css'
 import '../styles/homePage.css'
 import '../styles/blogPost.css'
 import AuthContextProvider from '../Context/AuthContext';
+import BlogDataContextProvider from '../Context/BlogDataContext';
 
 function MyApp({ Component, pageProps }) {
   return (
+    <BlogDataContextProvider>
     <AuthContextProvider>
     <BgContextProvider>
       <ToastContainer/>
@@ -18,6 +20,7 @@ function MyApp({ Component, pageProps }) {
         </Layout>
     </BgContextProvider>
     </AuthContextProvider>
+    </BlogDataContextProvider>
   )
 }
 

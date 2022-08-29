@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import PreviewCard from "../../reusableComps/PreviewCard";
 import RenderMounted from "../../reusableComps/RenderMounted";
-import useStyles from "../../utils/useStyles";
 
 const HomePage = ({ data }) => {
   const router = useRouter();
@@ -19,12 +18,12 @@ const HomePage = ({ data }) => {
           {data?.map((dets, indx) => (
             <PreviewCard
               key={indx}
-              date={dets?.date}
+              date={dets?.datePosted}
               title={dets?.title}
               previewText={dets?.preview}
               handleRead={handleRead}
-              id={dets?.id}
-              author={dets?.author}
+              id={dets?._id}
+              author={dets?.userName}
             />
           ))}
         </div>
