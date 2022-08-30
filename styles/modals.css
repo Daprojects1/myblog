@@ -1,0 +1,41 @@
+.delete__blog__modal{
+top: 150px;
+}
+
+
+/* .react-responsive-modal-modal.delete__blog__modal-w{
+    background: rgb(26, 24, 24);
+    color: rgb(218, 213, 213);
+}
+
+.react-responsive-modal-modal.delete__blog__modal-b{
+    background: (218, 213, 213);
+    color: rgb(26, 24, 24);
+} */
+.delete__blog__body{
+    max-width: 600px;
+    width: 80vw;
+    padding: 20px;
+    background: (218, 213, 213);
+    color: rgb(26, 24, 24);
+}
+
+
+.delete__modal__buttons{
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+.delete__modal__buttons .delete{
+    background-color: rgba(255, 0, 0,0.7);
+}
+
+.delete__modal__buttons .delete:hover{
+    color: initial;
+    border: none;
+}
+
+.delete__modal__buttons button{
+    height: 45px;
+    margin: 0;
+}

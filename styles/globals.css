@@ -117,6 +117,39 @@ ul{
   cursor: pointer;
 }
 
+.cursor {
+  cursor: pointer;
+}
+
+/* REACT QUILL STYLES */
+
+.react-quill{
+  margin-top: 40px;
+}
+.react-quill-b{
+  border: 1px solid rgb(26, 24, 24);
+}
+
+.react-quill-b .ql-toolbar.ql-snow{
+  border-bottom: 1px solid rgb(26, 24, 24) !important;
+}
+
+.react-quill-w {
+  border: 1px solid rgb(218, 213, 213) ;
+}
+
+.react-quill-w .ql-snow svg{
+  color: rgb(218, 213, 213) !important;
+}
+
+.react-quill-w .ql-toolbar.ql-snow{
+  border-bottom: 1px solid rgb(218, 213, 213) !important;
+}
+
+.ql-editor{
+  min-height: 400px;
+}
+
 input:-internal-autofill-selected {
   background: initial;
 }

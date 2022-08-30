@@ -25,7 +25,8 @@ const useStyles = () => {
         darkBorderColor,
         currentColor: blackOrWhite(),
         light,
-        dark
+        dark,
+        checked
     }
 }
 

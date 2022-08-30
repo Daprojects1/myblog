@@ -23,6 +23,7 @@ const HomePage = ({ data }) => {
               previewText={dets?.preview}
               handleRead={handleRead}
               id={dets?._id}
+              userId={dets?.userId}
               author={dets?.userName}
             />
           ))}

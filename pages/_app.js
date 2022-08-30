@@ -1,26 +1,22 @@
 import Layout from '../components/Layout'
-import BgContext, { BgContextProvider } from '../Context/ColourContext'
+import ContextProviders from '../components/ContextProviders/ContextProviders';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-responsive-modal/styles.css';
 import '../styles/globals.css'
 import '../styles/login.css'
 import '../styles/homePage.css'
 import '../styles/blogPost.css'
-import AuthContextProvider from '../Context/AuthContext';
-import BlogDataContextProvider from '../Context/BlogDataContext';
+import '../styles/modals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <BlogDataContextProvider>
-    <AuthContextProvider>
-    <BgContextProvider>
+    <ContextProviders>
       <ToastContainer/>
         <Layout>
          <Component {...pageProps} />
         </Layout>
-    </BgContextProvider>
-    </AuthContextProvider>
-    </BlogDataContextProvider>
+    </ContextProviders>
   )
 }
 

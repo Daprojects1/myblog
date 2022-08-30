@@ -5,6 +5,7 @@ import Router, { useRouter } from "next/router";
 import * as Yup from "yup";
 import useLogin from "../../hooks/Auth/useLogin";
 import { toast } from "react-toastify";
+import RenderMounted from "../../reusableComps/RenderMounted";
 import useAuthContext from "../../hooks/Auth/useAuthContext";
 import { useEffect } from "react";
 
@@ -49,47 +50,52 @@ const LoginPage = () => {
     e.preventDefault();
     handleSubmit();
   };
+
   return (
-    <form className="formBody">
-      <h3>Log In</h3>
-      <div className="formBody__inputs login__inputs">
-        <Input
-          type="text"
-          title="Username"
-          name="username"
-          id="uName"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.username}
-          errors={errors.username}
-          touched={touched.username}
+    <RenderMounted>
+      <form className="formBody">
+        <h3>Log In</h3>
+        <div className="formBody__inputs login__inputs">
+          <Input
+            type="text"
+            title="Username"
+            name="username"
+            id="uName"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.username}
+            errors={errors.username}
+            touched={touched.username}
+          />
+          <Input
+            type="password"
+            title="Password"
+            name="password"
+            id="pwd"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
+            errors={errors.password}
+            touched={touched.password}
+          />
+        </div>
+        <Appbutton
+          type="button"
+          className="appButton"
+          title="Login"
+          onClick={handleLogin}
+          disabled={loading}
         />
-        <Input
-          type="password"
-          title="Password"
-          name="password"
-          id="pwd"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          errors={errors.password}
-          touched={touched.password}
-        />
-      </div>
-      <Appbutton
-        type="button"
-        className="appButton"
-        title="Login"
-        onClick={handleLogin}
-        disabled={loading}
-      />
-      <div className="createAccount">
-        <p>Dont have an accout yet ?</p>
-        <p className="createAccLink" onClick={() => handleReRoute("/register")}>
-          Create an account
-        </p>
-      </div>
-    </form>
+        <div className="createAccount">
+          <p>Dont have an accout yet ?</p>
+          <p
+            className="createAccLink"
+            onClick={() => handleReRoute("/register")}>
+            Create an account
+          </p>
+        </div>
+      </form>
+    </RenderMounted>
   );
 };
 

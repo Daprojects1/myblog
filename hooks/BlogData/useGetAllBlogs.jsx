@@ -17,7 +17,7 @@ const useGetAllBlogs = () => {
       },
     });
 
-    const json = response.json();
+    const json = await response.json();
 
     if (!response.ok) {
       setLoading(false);
@@ -27,11 +27,11 @@ const useGetAllBlogs = () => {
 
     if (response.ok) {
       setLoading(false);
-      json
-        .then((res) => {
-          dispatch({ type: "SET__BLOGS", payload: res?.blogs });
-        })
-        .catch((err) => console.log(err));
+      try {
+        dispatch({ type: "SET__BLOGS", payload: json?.blogs });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return { loading, error, getAllBlogs };

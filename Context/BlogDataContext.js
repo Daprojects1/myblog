@@ -11,20 +11,17 @@ const blogDataReducer = (state, action) => {
         case 'SET__BLOGS':
             return {  ...state, allBlogs: action.payload }
         case 'DELETE__BLOG':
-            const filteredBlog = allBlogs.filter(b=> b.id !== id )
+            const filteredBlog = allBlogs?.filter(b=> b._id !== id )
             return { ...state ,allBlogs: filteredBlog}
         case 'EDIT__BLOG':
             const editBlog = allBlogs.map(b => {
-                return b?.id === id ? b : action?.payload
+                return b?._id === id ? b : action?.payload
             })
             return { ...state,allBlogs: editBlog }
         case 'CREATE__BLOG':
             const newblog = [...allBlogs, action?.payload]
             return {...state, allBlogs: newblog }
-        case 'GET__BLOG':
-            // const singleBlog = allBlogs?.find(b => b?._id === id)
-            // if (!singleBlog) return {...state, singleBlog:{}}
-            
+        case 'SET__BLOG':
             return {...state , singleBlog:action.payload}
         case 'PERSONAL__BLOGS':
             return { ...state, personalBlogs: action.payload }

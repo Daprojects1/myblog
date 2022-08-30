@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import useAuthContext from "../../hooks/Auth/useAuthContext";
 import useLogout from "../../hooks/Auth/useLogout";
 
-const { handleNavList, setRoutes } = routesConfig;
+const { handleNavList, setRoutes, allPaths } = routesConfig;
 const Layout = ({ children }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -19,19 +19,26 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     // gets the currrent nav list when logged in or out.
-    const navList = handleNavList(user);
-    const currentNavObj = setRoutes(navList);
-    const NAV = navList?.find((n) => n.name === currentNavObj);
-    const acceptablePaths = ["/blogs/[id]", "/register"];
-    if (acceptablePaths.find((p) => p === router.pathname)) {
-      setCurrentNav("");
-      return;
+    if (typeof window !== "undefined") {
+      const navList = handleNavList(user);
+      const currentNavObj = setRoutes(navList);
+
+      const NAV = navList?.find((n) => n.name === currentNavObj);
+
+      if (NAV) {
+        setCurrentNav(NAV.name);
+      }
+      const acceptablePaths = ["/blogs/[id]", "/register"];
+      if (acceptablePaths.find((p) => p === router.pathname)) {
+        setCurrentNav("");
+        return;
+      }
+
+      if (!NAV) {
+        if (!allPaths.includes(router.pathname)) router.push("/");
+        return;
+      }
     }
-    if (!NAV) {
-      router.push("/");
-      return;
-    }
-    setCurrentNav(NAV?.name);
   }, [router, user]);
 
   const handleNavClick = () => {
