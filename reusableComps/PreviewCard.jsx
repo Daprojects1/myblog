@@ -1,5 +1,6 @@
 import useAuthContext from "../hooks/Auth/useAuthContext";
 import useStyles from "../utils/useStyles";
+import { Interweave } from "interweave";
 
 const PreviewCard = ({
   title,
@@ -31,7 +32,9 @@ const PreviewCard = ({
       </div>
       <div className="title__prev">
         <h3 className="preview__title">{title}</h3>
-        <p className="preview__prev">{previewText}</p>
+        <p className="preview__prev">
+          <Interweave content={previewText} />
+        </p>
       </div>
       <p className="preview__more" onClick={() => handleRead(id)}>
         Read

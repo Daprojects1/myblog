@@ -2,40 +2,42 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuthContext from "../Auth/useAuthContext";
-import useBlogDataContext from "./useBlogDataContext";
 
-const useDeleteBlog = () => {
+const useCreateBlog = () => {
+  const router = useRouter();
+  const [errors, setErrors] = useState(null);
+  const [loading, setLoading] = useState(null);
   const { user } = useAuthContext();
 
-  const { dispatch } = useBlogDataContext();
-  const [loading, setLoading] = useState(null);
-  const [errors, setErrors] = useState(null);
-  const router = useRouter();
-
-  const deleteBlog = async (id) => {
+  const createBlog = async (data) => {
     setLoading(true);
+    setErrors(null);
     if (!user) return;
 
+    const { title, message, image } = data;
+
     try {
-      const response = await fetch(`http://localhost:5050/posts/${id}`, {
-        method: "DELETE",
+      const response = await fetch("http://localhost:5050/posts", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user?.accessToken}`,
         },
+        body: JSON.stringify(data),
       });
 
-      const json = await response.json();
+      const json = response.json();
 
       if (!response.ok) {
         setLoading(false);
         setErrors(json?.message);
         toast.error(json?.message);
       }
+
       if (response.ok) {
-        setLoading(false);
-        dispatch({ type: "DELETE__BLOG", payload: { id } });
-        toast.success("Blog has been deleted !");
+        setLoading(true);
+        toast.success("Success !");
+        console.log(json);
         router.push("/");
       }
     } catch (error) {
@@ -43,7 +45,7 @@ const useDeleteBlog = () => {
       toast.error(error.message);
     }
   };
-  return { deleteBlog, loading, errors };
+  return { createBlog, loading, errors };
 };
 
-export default useDeleteBlog;
+export default useCreateBlog;

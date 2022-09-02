@@ -13,30 +13,36 @@ const useGetSingleBlog = () => {
   const getSingleBlog = async (id) => {
     setLoading(true);
     setErrors(null);
-    const response = await fetch(`http://localhost:5050/posts/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    const json = await response.json();
+    try {
+      const response = await fetch(`http://localhost:5050/posts/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (!response.ok) {
-      setLoading(false);
-      setErrors(json?.message);
-      toast.error(json?.message);
-      router.replace("/");
-      dispatch({ type: "GET__BLOG", payload: {} });
-    }
+      const json = await response.json();
 
-    if (response.ok) {
-      setLoading(false);
-      try {
-        dispatch({ type: "SET__BLOG", payload: json?.blog });
-      } catch (error) {
-        console.log(error);
+      if (!response.ok) {
+        setLoading(false);
+        setErrors(json?.message);
+        toast.error(json?.message);
+        router.replace("/");
+        dispatch({ type: "GET__BLOG", payload: {} });
       }
+
+      if (response.ok) {
+        setLoading(false);
+        try {
+          dispatch({ type: "SET__BLOG", payload: json?.blog });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
     }
   };
   return { loading, error, getSingleBlog };

@@ -121,13 +121,27 @@ ul{
   cursor: pointer;
 }
 
+input:focus{
+  outline: none;
+}
+
 /* REACT QUILL STYLES */
 
 .react-quill{
-  margin-top: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.react-quill .ql-toolbar.ql-snow{
+border: none;
+}
+
+.react-quill .ql-container.ql-snow{
+  border: none;
 }
 .react-quill-b{
   border: 1px solid rgb(26, 24, 24);
+
 }
 
 .react-quill-b .ql-toolbar.ql-snow{

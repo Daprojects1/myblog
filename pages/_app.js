@@ -7,6 +7,7 @@ import '../styles/globals.css'
 import '../styles/login.css'
 import '../styles/homePage.css'
 import '../styles/blogPost.css'
+import '../styles/createBlog.css'
 import '../styles/modals.css'
 
 function MyApp({ Component, pageProps }) {

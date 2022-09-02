@@ -10,6 +10,7 @@ import DeleteBlogModal from "../../components/Modals/DeleteBlogModal";
 import EditBlogModal from "../../components/Modals/EditBlogModal";
 import useStyles from "../../utils/useStyles";
 import useDeleteBlog from "../../hooks/BlogData/useDeleteBlog";
+import { Interweave } from "interweave";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const router = useRouter();
@@ -91,7 +92,9 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
         </div>
       </div>
       {/* STRING SPLIT TO DETECT LINE BREAK let separateLines = str.split(/\r?\n|\r|\n/g); */}
-      <p className={`blogText`}>{message}</p>
+      <p className={`blogText`}>
+        <Interweave content={message} />
+      </p>
       <RenderIf isTrue={isUser}>
         <div className="actionButtons">
           <Appbutton

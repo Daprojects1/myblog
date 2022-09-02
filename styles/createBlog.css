@@ -1,0 +1,84 @@
+.create-blog{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+
+.create-blog .appButton{
+    height: 40px;
+    /* max-width: none; */
+    margin: 35px 0 35px auto;
+
+}
+.create-blog-inputs label{
+    margin-bottom: 15px;
+    font-size: 15px;
+    display: block;
+    border-radius: 5px;
+}
+
+.file-upload-body{
+    margin-top: 60px;
+    position: relative;
+}
+
+.file-upload-body .paraLabel {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+} 
+
+.file-upload-body label{
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    display: flex;
+    /* margin: 0 auto; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+
+.file-upload input{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+.file-upload .file-icon{
+    /* position: absolute;
+    display: flex;
+    flex-direction: column; */
+}
+.file-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-icon span{
+    display: block;
+    align-self: center;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+
+.blog-input-title{
+    margin-bottom: 50px;
+}
+
+
+.blog-input-title input{
+    width: 100%;
+    border-radius: 10px;
+    /* max-width:600px ; */
+    display: block;
+    height: 40px;
+}
+
