@@ -16,17 +16,18 @@ const useCreateBlog = () => {
 
     const { title, message, image } = data;
 
+    console.log(data);
     try {
       const response = await fetch("http://localhost:5050/posts", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${user?.accessToken}`,
         },
-        body: JSON.stringify(data),
+        body: data,
       });
 
-      const json = response.json();
+      const json = await response.json();
 
       if (!response.ok) {
         setLoading(false);
@@ -41,8 +42,9 @@ const useCreateBlog = () => {
         router.push("/");
       }
     } catch (error) {
+      const err = error.message || error;
       console.log(error);
-      toast.error(error.message);
+      toast.error(err);
     }
   };
   return { createBlog, loading, errors };

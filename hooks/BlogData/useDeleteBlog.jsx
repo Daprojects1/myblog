@@ -39,8 +39,9 @@ const useDeleteBlog = () => {
         router.push("/");
       }
     } catch (error) {
+      const err = error.message || error;
       console.log(error);
-      toast.error(error.message);
+      toast.error(err);
     }
   };
   return { deleteBlog, loading, errors };

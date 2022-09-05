@@ -14,7 +14,9 @@ const FileUpload = ({
       <label
         htmlFor={id}
         className={`file-upload ${labelClasses}`}
-        style={style}>
+        style={{
+          ...style,
+        }}>
         <div className={`file-icon ${iconClasses}`}>
           <span>{icon}</span>
           <span>Upload Image</span>

@@ -12,12 +12,14 @@ import '../styles/modals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ContextProviders>
+    <>
       <ToastContainer/>
+    <ContextProviders>
         <Layout>
          <Component {...pageProps} />
         </Layout>
     </ContextProviders>
+    </>
   )
 }
 

@@ -1,8 +1,8 @@
 import { useReducer, createContext, useState, useEffect } from "react";
-
-
+// import useAuthCheck from "../hooks/Auth/useAuthCheck";
 
 export const AuthContext = createContext({})
+
 
 
 const AuthReducer = (state, action) => {
@@ -20,9 +20,12 @@ const AuthContextProvider = ({ children }) => {
         user:null
     })
 
+    // const {authCheck} = useAuthCheck() 
+
     useEffect(() => {
         const user = localStorage.getItem('user')
-        if (user) dispatch({type:'LOGIN', payload: JSON.parse(user)})
+        // authCheck(user)
+        if (user)  dispatch({ type: "LOGIN", payload: JSON.parse(user) });
     }, [])
     
     return (
