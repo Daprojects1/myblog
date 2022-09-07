@@ -9,11 +9,14 @@ import '../styles/homePage.css'
 import '../styles/blogPost.css'
 import '../styles/createBlog.css'
 import '../styles/modals.css'
+import RenderMounted from '../reusableComps/RenderMounted';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <RenderMounted>
       <ToastContainer/>
+      </RenderMounted>
     <ContextProviders>
         <Layout>
          <Component {...pageProps} />

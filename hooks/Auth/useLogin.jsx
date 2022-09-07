@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuthContext from "./useAuthContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import apiEndPoints from "../../constants/apiEndpoints";
 
 const useLogin = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const useLogin = () => {
     setErrors(null);
 
     try {
-      const response = await fetch("http://localhost:5050/login", {
+      const response = await fetch(apiEndPoints?.login, {
         method: "POST",
         body: JSON.stringify({ username, password }),
         headers: {

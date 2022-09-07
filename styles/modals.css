@@ -21,6 +21,7 @@ top: 150px;
 }
 
 
+
 .delete__modal__buttons{
     display: flex;
     gap: 30px;
@@ -38,4 +39,47 @@ top: 150px;
 .delete__modal__buttons button{
     height: 45px;
     margin: 0;
+}
+
+
+/* Edit Blog */
+
+
+.edit__blog__modal{
+    border-radius: 10px;
+}
+.edit__blog__body{
+    max-width: 900px;
+    background: (218, 213, 213);
+    color: rgb(26, 24, 24);
+    /* width: 80vw; */
+}
+
+
+.edit__blog__body{
+    margin: 0 auto;
+}
+
+.edit__blog__body .create-blog{
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.edit__blog__body .cover-image-check{
+    width: 100%;
+}
+
+.edit__blog__body img{
+    width: 100%;
+    border: 5px;
+}
+.edit__blog__body .file-upload-body{
+    align-self: center;
+    max-width: 450px;
+    width: 100%;
+}
+
+.edit__blog__body .appButton{
+    max-width: 500px;
+    margin: 0 auto;
 }

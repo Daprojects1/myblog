@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuthContext from "./useAuthContext";
+import apiEndPoints from "../../constants/apiEndpoints";
 
 const useRegister = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const useRegister = () => {
     setErrors(null);
 
     try {
-      const response = await fetch("http://localhost:5050/register", {
+      const response = await fetch(apiEndPoints?.register, {
         method: "POST",
         body: JSON.stringify({ username, password, email }),
         headers: {

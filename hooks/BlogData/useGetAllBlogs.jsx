@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import apiEndPoints from "../../constants/apiEndpoints";
 import useBlogDataContext from "./useBlogDataContext";
 
 const useGetAllBlogs = () => {
@@ -11,7 +12,7 @@ const useGetAllBlogs = () => {
     setLoading(true);
     setErrors(null);
     try {
-      const response = await fetch("http://localhost:5050/posts", {
+      const response = await fetch(apiEndPoints?.posts, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

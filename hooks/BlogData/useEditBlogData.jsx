@@ -4,40 +4,49 @@ import { toast } from "react-toastify";
 import apiEndPoints from "../../constants/apiEndpoints";
 import useAuthContext from "../Auth/useAuthContext";
 import useBlogDataContext from "./useBlogDataContext";
+import useGetSingleBlog from "./useGetSingleBlog";
 
-const useDeleteBlog = () => {
+const useEditBlog = () => {
   const { user } = useAuthContext();
 
+  const router = useRouter();
   const { dispatch } = useBlogDataContext();
+
   const [loading, setLoading] = useState(null);
   const [errors, setErrors] = useState(null);
-  const router = useRouter();
+  const { getSingleBlog } = useGetSingleBlog();
 
-  const deleteBlog = async (id) => {
+  const editBlog = async (id, data) => {
     setLoading(true);
-    if (!user) return;
+
+    if (!user) {
+      toast.error("user is not logged in!");
+      return;
+    }
 
     try {
       const response = await fetch(`${apiEndPoints?.posts}/${id}`, {
-        method: "DELETE",
+        method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${user?.accessToken}`,
         },
+        body: data,
       });
 
       const json = await response.json();
 
       if (!response.ok) {
         setLoading(false);
-        setErrors(json?.message);
-        toast.error(json?.message);
+        setErrors(json?.msg || json?.message);
+        toast.error(json?.msg || json?.message);
       }
+
       if (response.ok) {
+        console.log(json);
         setLoading(false);
-        dispatch({ type: "DELETE__BLOG", payload: { id } });
-        toast.success("Blog has been deleted !");
-        router.push("/");
+        toast.success("Success !");
+        getSingleBlog(id);
+        router.push(`/blogs/${id}`);
       }
     } catch (error) {
       const err = error.message || error;
@@ -45,7 +54,8 @@ const useDeleteBlog = () => {
       toast.error(err);
     }
   };
-  return { deleteBlog, loading, errors };
+
+  return { editBlog, loading, errors };
 };
 
-export default useDeleteBlog;
+export default useEditBlog;

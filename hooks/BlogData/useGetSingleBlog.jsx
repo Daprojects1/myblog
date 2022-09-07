@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import apiEndPoints from "../../constants/apiEndpoints";
 import { BlogDataContext } from "../../Context/BlogDataContext";
 import useBlogDataContext from "./useBlogDataContext";
 
@@ -15,7 +16,7 @@ const useGetSingleBlog = () => {
     setErrors(null);
 
     try {
-      const response = await fetch(`http://localhost:5050/posts/${id}`, {
+      const response = await fetch(`${apiEndPoints?.posts}/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import apiEndPoints from "../../constants/apiEndpoints";
 import useAuthContext from "../Auth/useAuthContext";
 
 const useCreateBlog = () => {
@@ -18,10 +19,9 @@ const useCreateBlog = () => {
 
     console.log(data);
     try {
-      const response = await fetch("http://localhost:5050/posts", {
+      const response = await fetch(apiEndPoints?.posts, {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${user?.accessToken}`,
         },
         body: data,
@@ -38,7 +38,6 @@ const useCreateBlog = () => {
       if (response.ok) {
         setLoading(true);
         toast.success("Success !");
-        console.log(json);
         router.push("/");
       }
     } catch (error) {

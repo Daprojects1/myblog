@@ -11,6 +11,9 @@ import EditBlogModal from "../../components/Modals/EditBlogModal";
 import useStyles from "../../utils/useStyles";
 import useDeleteBlog from "../../hooks/BlogData/useDeleteBlog";
 import { Interweave } from "interweave";
+import ProfileIcon from "../../components/Svgs/ProfileIcon";
+import placeholderImages from "../../constants/images";
+import apiEndPoints from "../../constants/apiEndpoints";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const router = useRouter();
@@ -47,6 +50,9 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
     title,
   } = state?.singleBlog;
 
+  const imgUrl = image?.includes("jpg")
+    ? `${apiEndPoints.server}${image}`
+    : placeholderImages[1];
   const { currentColor } = useStyles();
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -74,13 +80,11 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
 
     <div className="singleBlogPost">
       <div className="blogImage">
-        <img className="blog-img" src={image} />
+        <img className="blog-img" src={imgUrl} alt="" />
       </div>
-      <h2>{title}</h2>
+
       <div className="image__author">
-        <div
-          className="fake__img"
-          style={{ border: `1px solid ${currentColor}` }}></div>
+        <ProfileIcon />
         <div className="username__date">
           <p>
             By{" "}
@@ -91,7 +95,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
           <p>{datePostedN}</p>
         </div>
       </div>
-      {/* STRING SPLIT TO DETECT LINE BREAK let separateLines = str.split(/\r?\n|\r|\n/g); */}
+      <h2>{title}</h2>
       <p className={`blogText`}>
         <Interweave content={message} />
       </p>
@@ -115,6 +119,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
         <EditBlogModal
           isOpen={isOpenEditModal}
           handleClose={handleCloseEditModal}
+          data={state?.singleBlog}
         />
       }
       <DeleteBlogModal

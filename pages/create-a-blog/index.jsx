@@ -12,7 +12,9 @@ import Upload from "../../components/Svgs/Upload";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import useCreateBlog from "../../hooks/BlogData/useCreateBlog";
+import RenderMounted from "../../reusableComps/RenderMounted";
 import { toast } from "react-toastify";
+import CreateBlogBody from "../../components/CreateBlog";
 
 const CreateBlog = () => {
   const initialValues = {
@@ -63,7 +65,6 @@ const CreateBlog = () => {
     formik;
 
   const { checked, light, dark, currentColor } = useStyles();
-  const styleTxt = checked ? "react-quill-b" : "react-quill-w";
 
   // Functions for handling logic
   const showMessageError = () => {
@@ -88,7 +89,6 @@ const CreateBlog = () => {
 
   const handlePhotoUpload = (e) => {
     const imgFile = e.target.files[0];
-    console.log(imgFile);
     const match = ["image/jpeg", "image/png"];
     if (match.indexOf(imgFile?.type) !== -1) {
       setImage(imgFile);
@@ -96,7 +96,6 @@ const CreateBlog = () => {
       // const reader = new FileReader();
       // const url = reader.readAsDataURL(imgFile);
       const url = URL.createObjectURL(imgFile);
-      console.log(url);
       setImageUrl(url);
       return;
     }
@@ -113,79 +112,23 @@ const CreateBlog = () => {
   };
   // Finish up the UI for the post form.
 
-  const inputStyles = {
-    background: "inherit",
-    borderColor: currentColor,
-    borderWidth: "1px",
-    borderStyle: "solid",
-    padding: "10px",
-    color: "inherit",
+  const handleCancelImage = () => {
+    setImageUrl("");
+    setImage("");
   };
+
+  // EXtract this into another component so that it can be reused for the edit blog modal.
   return (
-    <div className="create-blog">
-      <div className="create-blog-inputs">
-        <Input
-          name="title"
-          type="text"
-          title="Title"
-          bodyClasses={"blog-input-title"}
-          value={values.title}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={errors.title}
-          touched={touched.title}
-          isInitialStyles={false}
-          style={inputStyles}
-        />
-        <Input
-          name="preview"
-          type="text"
-          title="Preview"
-          bodyClasses={"blog-input-title"}
-          value={values.preview}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errors={errors.preview}
-          touched={touched.preview}
-          isInitialStyles={false}
-          style={inputStyles}
-        />
-        <div>
-          <label htmlFor="message">Content</label>
-          <ReactQuill
-            theme="snow"
-            value={messageValue}
-            className={`react-quill ${styleTxt}`}
-            onChange={handleChangeMessage}
-            id="message"
-          />
-          <div className="error-msg">{messageError && messageError}</div>
-        </div>
-        {imgUrl && (
-          <div className="cover-image-check">
-            <img src={imgUrl} alt="coverImage" className="cover-image-prev" />
-            <button className="cover-img-btn" onClick={() => setImageUrl("")}>
-              X
-            </button>
-          </div>
-        )}
-        <FileUpload
-          name="fileUpload"
-          id="fileUpload"
-          title="Header Image Upload"
-          icon={<Upload width="20" height="20" />}
-          style={{ border: `1px solid ${currentColor}` }}
-          handleChange={handlePhotoUpload}
-        />
-      </div>
-      <AppButton
-        title="Submit"
-        onClick={handleButtonSubmit}
-        className="appButton"
-        type="button"
-      />
-      {/* <img src={imgUrl} alt="imageBody" /> */}
-    </div>
+    <CreateBlogBody
+      formik={formik}
+      handleChangeMessage={handleChangeMessage}
+      handleButtonSubmit={handleButtonSubmit}
+      handlePhotoUpload={handlePhotoUpload}
+      messageError={messageError}
+      messageValue={messageValue}
+      imgUrl={imgUrl}
+      handleCancelImage={handleCancelImage}
+    />
   );
 };
 

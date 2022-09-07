@@ -1,6 +1,7 @@
 import useAuthContext from "../hooks/Auth/useAuthContext";
 import useStyles from "../utils/useStyles";
 import { Interweave } from "interweave";
+import ProfileIcon from "../components/Svgs/ProfileIcon";
 
 const PreviewCard = ({
   title,
@@ -20,9 +21,7 @@ const PreviewCard = ({
     <div className="previewCard" style={{ borderBottom: borderBottom }}>
       <div className="preview__imgDate">
         {/* ADD USER IMAGE */}
-        <div
-          className="fake__img"
-          style={{ border: `1px solid ${currentColor}` }}></div>
+        <ProfileIcon />
         <p
           className="preview__author"
           style={{ color: isUser ? "mediumpurple" : "" }}>
@@ -32,9 +31,7 @@ const PreviewCard = ({
       </div>
       <div className="title__prev">
         <h3 className="preview__title">{title}</h3>
-        <p className="preview__prev">
-          <Interweave content={previewText} />
-        </p>
+        <p className="preview__prev">{`${previewText.substring(0, 80)}...`}</p>
       </div>
       <p className="preview__more" onClick={() => handleRead(id)}>
         Read
