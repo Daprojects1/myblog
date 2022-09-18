@@ -10,6 +10,7 @@ const setRoutes = (currentNavList) => {
 const loginNavList = [
   { name: "Home", path: "/" },
   { name: "Create A Blog", path: "/create-a-blog" },
+  { name: "News", path: "/news" },
   { name: "Logout", path: "/logout" },
 ];
 const loggedOutNav = [

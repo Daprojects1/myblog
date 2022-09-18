@@ -7,6 +7,7 @@ import useAuthContext from "../../hooks/Auth/useAuthContext";
 import useLogout from "../../hooks/Auth/useLogout";
 
 const { handleNavList, setRoutes, allPaths } = routesConfig;
+
 const Layout = ({ children }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);

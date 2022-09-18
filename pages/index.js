@@ -4,6 +4,7 @@ import HomePage from "../components/HomePage"
 import { BlogDataContext } from "../Context/BlogDataContext"
 import useBlogDataContext from "../hooks/BlogData/useBlogDataContext"
 import useGetAllBlogs from "../hooks/BlogData/useGetAllBlogs"
+import Loading from "../components/Loading"
 
 
 export default function Home() {
@@ -24,7 +25,8 @@ export default function Home() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  
+  // Do Expired session !
+  if (loading) return <Loading/>
   return (
     <HomePage data={state?.allBlogs} />
   )

@@ -1,0 +1,26 @@
+.news-body{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+
+}
+
+.news-card{
+    margin: 0 auto;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 25px;
+}
+.news-card img{
+    width: 80%;
+    max-width: 600px;
+    border-radius: 15px;
+}
+
+.news-card a{
+    display: block;
+    max-width: 300px;
+}

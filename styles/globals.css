@@ -31,15 +31,19 @@ a {
 }
 
 .bg-black{
-  color: rgb(218, 213, 213);
-  background: rgb(26, 24, 24);
+  color: rgb(218, 213, 213) !important;
+  background: rgb(26, 24, 24) !important;
 }
 
 .bg-white{
-color: rgb(26, 24, 24);
-background-color:rgb(218, 213, 213) ;
+color: rgb(26, 24, 24) !important;
+background-color:rgb(218, 213, 213) !important;
 }
 
+
+.containerBody .bg-black .blogText{
+  color: white;
+}
 /* .toggleSwitch{
   display: flex;
   justify-content: flex-end;
@@ -73,6 +77,9 @@ background-color:rgb(218, 213, 213) ;
   gap: 30px;
 }
 
+ul.desktopNavList{
+  margin-bottom: 0;
+}
 .headerList{
   display: flex;
   gap: 75px;
@@ -164,6 +171,14 @@ border: none;
   min-height: 400px;
 }
 
+
+.spinner-body{
+  width: 100%;
+  min-height:70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 input:-internal-autofill-selected {
   background: initial;
 }

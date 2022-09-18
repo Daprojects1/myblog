@@ -25,6 +25,8 @@ const blogDataReducer = (state, action) => {
             return {...state , singleBlog:action.payload}
         case 'PERSONAL__BLOGS':
             return { ...state, personalBlogs: action.payload }
+        case 'SET__NEWS':
+            return {...state, news:action.payload}
         default:
             return state
     }
@@ -36,6 +38,7 @@ const BlogDataContextProvider = ({children}) => {
         allBlogs: [],
         singleBlog: {},
         personalBlogs: {},
+        news:[]
     })
     return ( 
         <BlogDataContext.Provider value={{state, dispatch}}>

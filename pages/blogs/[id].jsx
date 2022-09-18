@@ -14,6 +14,7 @@ import { Interweave } from "interweave";
 import ProfileIcon from "../../components/Svgs/ProfileIcon";
 import placeholderImages from "../../constants/images";
 import apiEndPoints from "../../constants/apiEndpoints";
+import Loading from "../../components/Loading";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const router = useRouter();
@@ -53,6 +54,8 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const imgUrl = image?.includes("jpg")
     ? `${apiEndPoints.server}${image}`
     : placeholderImages[1];
+
+  console.log(imgUrl);
   const { currentColor } = useStyles();
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -74,7 +77,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
 
   const isUser = user && user?._id === userId;
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   return (
     // Find a way to navigate back home. goBack button at top? Finish Create A blog page {type of form}. Then think about personal blogs display ! Own Profile.
 
