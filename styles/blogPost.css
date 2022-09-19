@@ -35,10 +35,12 @@
 
 .blogText span{
     background-color: initial !important;
+    color: inherit !important;
 }
 
 .blogText strong{
     background-color: initial !important;
+    color: inherit !important;
 }
 
 .blogText p{
