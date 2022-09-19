@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import useBlogDataContext from "../BlogData/useBlogDataContext";
+import { toast } from "react-toastify";
 
 const useGetAllNews = () => {
   const [loading, setLoading] = useState(null);
@@ -21,8 +22,10 @@ const useGetAllNews = () => {
         fromPublishedDate: "null",
         toPublishedDate: "null",
       },
+      // 43b2e0a6c7msh78abb2e9c5b558ep169e91jsnca4dd6bf453b
+      // 6837a1f539msh1b705e970023170p151f68jsn293d56b07c2c
       headers: {
-        "X-RapidAPI-Key": "6837a1f539msh1b705e970023170p151f68jsn293d56b07c2c",
+        "X-RapidAPI-Key": "43b2e0a6c7msh78abb2e9c5b558ep169e91jsnca4dd6bf453b",
         "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
       },
     };
@@ -35,6 +38,8 @@ const useGetAllNews = () => {
       .catch(function (error) {
         setLoading(false);
         setErrors(error);
+        console.log(error);
+        toast.error(error?.response?.data?.message);
       });
   };
 

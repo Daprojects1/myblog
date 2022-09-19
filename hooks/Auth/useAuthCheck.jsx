@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuthContext from "./useAuthContext";
+import apiEndPoints from "../../constants/apiEndpoints";
 
 const useAuthCheck = () => {
   const [errors, setErrors] = useState(null);
@@ -19,7 +20,7 @@ const useAuthCheck = () => {
     setLoading(true);
     setErrors(null);
     try {
-      const response = await fetch("http://localhost:5050/auth", {
+      const response = await fetch(apiEndPoints.authCheck, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${user.accessToken}`,

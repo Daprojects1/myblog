@@ -51,11 +51,10 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
     title,
   } = state?.singleBlog;
 
-  const imgUrl = image?.includes("jpg")
+  const imgUrl = image
     ? `${apiEndPoints.server}${image}`
     : placeholderImages[1];
 
-  console.log(imgUrl);
   const { currentColor } = useStyles();
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -83,7 +82,15 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
 
     <div className="singleBlogPost">
       <div className="blogImage">
-        <img className="blog-img" src={imgUrl} alt="" />
+        <img
+          className="blog-img"
+          src={imgUrl}
+          alt=""
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.src = `${placeholderImages[1]}`;
+          }}
+        />
       </div>
 
       <div className="image__author">
@@ -97,6 +104,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
           </p>
           <p>{datePostedN}</p>
         </div>
+        {isUser && <span className="likes">{likes + " Likes"}</span>}
       </div>
       <h2>{title}</h2>
       <p className={`blogText`}>

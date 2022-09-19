@@ -42,7 +42,6 @@ const useEditBlog = () => {
       }
 
       if (response.ok) {
-        console.log(json);
         setLoading(false);
         toast.success("Success !");
         getSingleBlog(id);

@@ -28,7 +28,7 @@ const NavList = ({
   };
 
   return (
-    <ul className={listClasses}>
+    <ul className={listClasses} style={{ padding: "0" }}>
       {list?.map((item, indx) => (
         <li
           style={

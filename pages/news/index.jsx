@@ -21,7 +21,7 @@ const News = () => {
   return (
     <div className="news-body">
       {news?.value?.map((data, i) => (
-        <div key={i} className="news-card" style={{ border: borderBottom }}>
+        <div key={i} className="news-card">
           <img
             src={data?.image?.url}
             alt=""
@@ -30,8 +30,17 @@ const News = () => {
               currentTarget.src = "/news-pages.jpg";
             }}
           />
-          <a href={data?.url}>{data?.title}</a>
-          <div>{data?.description?.substring(0, 30)}</div>
+          <div className="news-text">
+            <div className="news-published">
+              {data?.datePublished.substring(0, 10)}
+            </div>
+            <a href={data?.url} className="news-title">
+              {data?.title}
+            </a>
+            <div className="news-description">
+              {data?.description?.substring(0, 100) + "..."}
+            </div>
+          </div>
         </div>
       ))}
     </div>

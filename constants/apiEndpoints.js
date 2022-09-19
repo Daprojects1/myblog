@@ -1,10 +1,13 @@
+const isLocal = false
 const dbEndPoint = 'https://aqueous-oasis-34234.herokuapp.com/'
+const devEndPoint = 'http://localhost:5050/'
+const mainEndPoint = isLocal ? devEndPoint : dbEndPoint
 const apiEndPoints = {
-    posts: `${dbEndPoint}posts`,
-    authCheck: `${dbEndPoint}auth`,
-    register: `${dbEndPoint}register`,
-    login: `${dbEndPoint}login`,
-    server:`${dbEndPoint}`
+    posts: `${mainEndPoint}posts`,
+    authCheck: `${mainEndPoint}auth`,
+    register: `${mainEndPoint}register`,
+    login: `${mainEndPoint}login`,
+    server:`${mainEndPoint}`
 }
 
 
