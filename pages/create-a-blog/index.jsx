@@ -23,7 +23,7 @@ const CreateBlog = () => {
     image: "",
   };
 
-  const { createBlog } = useCreateBlog();
+  const { createBlog, loading, errors: createBlogErrors } = useCreateBlog();
 
   const [image, setImage] = useState({});
   const [imgUrl, setImageUrl] = useState("");
@@ -128,6 +128,7 @@ const CreateBlog = () => {
       messageValue={messageValue}
       imgUrl={imgUrl}
       handleCancelImage={handleCancelImage}
+      loading={loading}
     />
   );
 };

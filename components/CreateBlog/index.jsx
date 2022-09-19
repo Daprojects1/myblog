@@ -19,6 +19,7 @@ const CreateBlogBody = ({
   handlePhotoUpload,
   imgUrl,
   edit,
+  loading,
 }) => {
   const { checked, currentColor } = useStyles();
   const styleTxt = checked ? "react-quill-b" : "react-quill-w";
@@ -95,6 +96,8 @@ const CreateBlogBody = ({
           onClick={handleButtonSubmit}
           className="appButton"
           type="button"
+          disabled={loading ? true : false}
+          loading={loading}
         />
       </div>
     </RenderMounted>

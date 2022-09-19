@@ -1,6 +1,15 @@
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 
-const Appbutton = ({ type, title, className, onClick, disabled, style }) => {
+const Appbutton = ({
+  type,
+  title,
+  className,
+  onClick,
+  disabled,
+  style,
+  loading,
+}) => {
   return (
     <>
       <button
@@ -9,7 +18,8 @@ const Appbutton = ({ type, title, className, onClick, disabled, style }) => {
         onClick={onClick}
         disabled={disabled}
         style={style}>
-        {title}
+        {!loading && title}
+        {loading && <Spinner animation="border" role="status" />}
       </button>
     </>
   );
