@@ -72,10 +72,47 @@
     position: relative;
 }
 
+.likes-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.like-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+    position: relative;
+    margin: 30px auto;
+}
 .likes{
     position: absolute;
     right: 20px;
 }
+
+
+.like-btn svg{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+
+.liked{
+    background-color: mediumpurple;
+    color: white;
+}
+
+.like-btn:hover{
+    background-color: mediumpurple;
+    color: white;
+    border: none;
+}
+
+
+
 .image__author .fake__img{
 
 }

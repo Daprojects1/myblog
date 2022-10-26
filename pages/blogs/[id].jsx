@@ -15,6 +15,8 @@ import ProfileIcon from "../../components/Svgs/ProfileIcon";
 import placeholderImages from "../../constants/images";
 import apiEndPoints from "../../constants/apiEndpoints";
 import Loading from "../../components/Loading";
+import { AiFillLike } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const router = useRouter();
@@ -27,11 +29,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const getSingleBlogA = async () => await getSingleBlog(id);
   useEffect(() => {
     //  not authorized, reroute home
-    if (id) getSingleBlogA(id);
-
-    if (Object?.entries(state?.singleBlog) === 0) {
-      router.push("/");
-    }
+    if (id) getSingleBlogA();
 
     return () => {
       dispatch({ type: "SET__BLOG", payload: {} });
@@ -55,7 +53,8 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
     ? `${apiEndPoints.server}${image}`
     : placeholderImages[1];
 
-  const { currentColor } = useStyles();
+  const { currentColor, borderBottom } = useStyles();
+  const [isLiked, setIsLiked] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
@@ -70,6 +69,16 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   };
   const handleDeleteBlog = () => {
     handleOpenDeleteModal();
+  };
+
+  const handleChangeLikes = () => {
+    if (!user) {
+      toast.info("Sorry, you have to be logged in to like a post");
+      return router.push("/login");
+    }
+
+    setIsLiked((prev) => !prev);
+    // make a call to backend with current data. also change current likes count
   };
 
   const datePostedN = datePosted?.split(" ")[0];
@@ -110,6 +119,17 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
       <p className={`blogText`}>
         <Interweave content={message} />
       </p>
+      <RenderIf isTrue={user?._id !== userId}>
+        <div className="likes-section">
+          <div
+            className={`like-btn ${isLiked && "liked"}`}
+            style={{ border: !isLiked ? borderBottom : "" }}
+            onClick={handleChangeLikes}>
+            <AiFillLike />
+          </div>
+          <div>{likes + " likes"}</div>
+        </div>
+      </RenderIf>
       <RenderIf isTrue={isUser}>
         <div className="actionButtons">
           <Appbutton
