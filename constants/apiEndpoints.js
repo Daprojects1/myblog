@@ -1,4 +1,4 @@
-const isLocal = true;
+const isLocal = false;
 const dbEndPoint = "https://aqueous-oasis-34234.herokuapp.com/";
 const devEndPoint = "http://localhost:5050/";
 const mainEndPoint = isLocal ? devEndPoint : dbEndPoint;
