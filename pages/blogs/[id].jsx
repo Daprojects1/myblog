@@ -17,6 +17,7 @@ import apiEndPoints from "../../constants/apiEndpoints";
 import Loading from "../../components/Loading";
 import { AiFillLike } from "react-icons/ai";
 import { toast } from "react-toastify";
+import useHandleLike from "../../hooks/BlogData/useHandleLike";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const router = useRouter();
@@ -25,6 +26,11 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const { state, dispatch } = useBlogDataContext(BlogDataContext);
   const { user } = useAuthContext();
   const { deleteBlog, loading: deleteLoading, errors } = useDeleteBlog();
+  const {
+    handleLike,
+    loading: handleLikeLoading,
+    errors: handleLikeErrors,
+  } = useHandleLike();
 
   const getSingleBlogA = async () => await getSingleBlog(id);
   useEffect(() => {
@@ -45,6 +51,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
     userName,
     likes,
     comments,
+    totalLikes,
     datePosted,
     title,
   } = state?.singleBlog;
@@ -53,8 +60,19 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
     ? `${apiEndPoints.server}${image}`
     : placeholderImages[1];
 
-  const { currentColor, borderBottom } = useStyles();
   const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    const hasLiked = likes?.find((like) => like?.userId === user?._id);
+    if (!hasLiked) {
+      setIsLiked(false);
+      return;
+    }
+
+    setIsLiked(true);
+  }, [likes, user]);
+
+  const { currentColor, borderBottom } = useStyles();
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
@@ -77,7 +95,10 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
       return router.push("/login");
     }
 
+    // console.log(currentLike);
+    const currentLike = isLiked;
     setIsLiked((prev) => !prev);
+    handleLike(_id, !currentLike);
     // make a call to backend with current data. also change current likes count
   };
 
@@ -113,7 +134,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
           </p>
           <p>{datePostedN}</p>
         </div>
-        {isUser && <span className="likes">{likes + " Likes"}</span>}
+        {isUser && <span className="likes">{totalLikes + " Likes"}</span>}
       </div>
       <h2>{title}</h2>
       <p className={`blogText`}>
@@ -127,7 +148,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
             onClick={handleChangeLikes}>
             <AiFillLike />
           </div>
-          <div>{likes + " likes"}</div>
+          <div>{totalLikes + " likes"}</div>
         </div>
       </RenderIf>
       <RenderIf isTrue={isUser}>
