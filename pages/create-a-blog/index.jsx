@@ -15,6 +15,7 @@ import useCreateBlog from "../../hooks/BlogData/useCreateBlog";
 import RenderMounted from "../../reusableComps/RenderMounted";
 import { toast } from "react-toastify";
 import CreateBlogBody from "../../components/CreateBlog";
+import withAuthCheck from "../../components/HighOrderComponents/withAuthCheck";
 
 const CreateBlog = () => {
   const initialValues = {
@@ -133,4 +134,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default withAuthCheck(CreateBlog);
