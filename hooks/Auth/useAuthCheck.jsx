@@ -13,7 +13,7 @@ const useAuthCheck = () => {
 
   const authCheck = async (user) => {
     if (!user) {
-      dispatch({ type: "LOGOUT" });
+      // dispatch({ type: "LOGOUT" });
       return;
     }
 
@@ -23,7 +23,7 @@ const useAuthCheck = () => {
       const response = await fetch(apiEndPoints.authCheck, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       });
 
@@ -38,8 +38,8 @@ const useAuthCheck = () => {
 
       if (response.ok) {
         setLoading(false);
-        dispatch({ type: "LOGIN", payload: JSON.parse(user) });
-        router.push("/");
+        dispatch({ type: "LOGIN", payload: user });
+        // router.push("/");
       }
     } catch (error) {
       const err = error.message || error;

@@ -18,6 +18,7 @@ import Loading from "../../components/Loading";
 import { AiFillLike } from "react-icons/ai";
 import { toast } from "react-toastify";
 import useHandleLike from "../../hooks/BlogData/useHandleLike";
+import withAuthCheck from "../../components/HighOrderComponents/withAuthCheck";
 
 const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   const router = useRouter();
@@ -183,4 +184,4 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
   );
 };
 
-export default BlogPost;
+export default withAuthCheck(BlogPost);
