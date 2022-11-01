@@ -63,9 +63,8 @@ h3.registerH3{
 }
 
 .appButton:hover{
-    border: 1px solid rgb(67, 65, 143);
-    background-color:rgb(218, 213, 213) ;
-    color:  rgb(67, 65, 143);
+    background: mediumpurple;
+    color:  white;
 }
 
 .blogCols{

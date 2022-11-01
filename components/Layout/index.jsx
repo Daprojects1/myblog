@@ -5,7 +5,6 @@ import routesConfig from "../../utils/setRoutes";
 import { useRouter } from "next/router";
 import useAuthContext from "../../hooks/Auth/useAuthContext";
 import useLogout from "../../hooks/Auth/useLogout";
-import withAuthCheck from "../HighOrderComponents/withAuthCheck";
 
 const { handleNavList, setRoutes, allPaths } = routesConfig;
 

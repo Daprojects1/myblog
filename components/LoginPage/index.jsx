@@ -85,6 +85,7 @@ const LoginPage = () => {
           title="Login"
           onClick={handleLogin}
           disabled={loading}
+          useKeyDown={true}
         />
         <div className="createAccount">
           <p>Dont have an accout yet ?</p>

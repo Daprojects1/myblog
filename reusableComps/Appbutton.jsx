@@ -9,7 +9,19 @@ const Appbutton = ({
   disabled,
   style,
   loading,
+  useKeyDown,
 }) => {
+  useEffect(() => {
+    if (typeof window !== "undefined" && useKeyDown) {
+      const handleKeyDown = (e) => {
+        if (e.code === "Enter") {
+          if (!disabled) onClick(e);
+        }
+      };
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [disabled, onClick, useKeyDown]);
   return (
     <>
       <button
@@ -18,8 +30,7 @@ const Appbutton = ({
         onClick={onClick}
         disabled={disabled}
         style={style}>
-        {!loading && title}
-        {loading && <Spinner animation="border" role="status" />}
+        {loading ? <Spinner animation="border" role="status" /> : title}
       </button>
     </>
   );

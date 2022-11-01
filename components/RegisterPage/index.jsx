@@ -129,6 +129,7 @@ const RegisterPage = () => {
         title="Sign up"
         onClick={handleLogin}
         disabled={loading}
+        useKeyDown={true}
       />
       <div className="createAccount">
         <p>
