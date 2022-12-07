@@ -13,6 +13,16 @@ a {
   text-decoration: none;
 }
 
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+input:focus{
+  outline: none;
+}
+
+
 * {
   box-sizing: border-box;
 }
@@ -105,11 +115,6 @@ ul.desktopNavList{
   align-items: center;
 }
 
-ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
 
 .loggedInContainer li{
@@ -128,9 +133,6 @@ ul{
   cursor: pointer;
 }
 
-input:focus{
-  outline: none;
-}
 
 /* REACT QUILL STYLES */
 

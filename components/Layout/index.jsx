@@ -5,6 +5,7 @@ import routesConfig from "../../utils/setRoutes";
 import { useRouter } from "next/router";
 import useAuthContext from "../../hooks/Auth/useAuthContext";
 import useLogout from "../../hooks/Auth/useLogout";
+import { toast } from "react-toastify";
 
 const { handleNavList, setRoutes, allPaths } = routesConfig;
 
@@ -13,6 +14,8 @@ const Layout = ({ children }) => {
   const [open, setOpen] = useState(false);
   const { user } = useAuthContext();
   const { logout } = useLogout();
+
+  // RESTRUCTURE NAVIGATION.
 
   const [currentNav, setCurrentNav] = useState(() => {
     return setRoutes(handleNavList(user));
@@ -37,6 +40,7 @@ const Layout = ({ children }) => {
 
       if (!NAV) {
         if (!allPaths.includes(router.pathname)) router.push("/");
+
         return;
       }
     }
@@ -61,8 +65,6 @@ const Layout = ({ children }) => {
   const handleCloseNav = () => {
     setOpen(false);
   };
-
-  // Add news later
 
   return (
     <div className="containerBody">

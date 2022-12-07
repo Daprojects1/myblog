@@ -116,7 +116,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
         <img
           className="blog-img"
           src={imgUrl}
-          alt=""
+          alt="The Blog Image"
           onError={({ currentTarget }) => {
             currentTarget.onerror = null; // prevents looping
             currentTarget.src = `${placeholderImages[1]}`;
@@ -137,6 +137,7 @@ const BlogPost = ({ loggedIn = true, isOwnPost = true }) => {
         </div>
         {isUser && <span className="likes">{totalLikes + " Likes"}</span>}
       </div>
+
       <h2>{title}</h2>
       <p className={`blogText`}>
         <Interweave content={message} />
