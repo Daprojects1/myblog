@@ -32,7 +32,8 @@ const useRegister = () => {
         toast.error(json?.message);
       }
       if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(json));
+        const { user } = json;
+        localStorage.setItem("user", JSON.stringify(user));
         dispatch({ type: "LOGIN", payload: json?.user });
         toast.success("success !");
         setLoading(false);

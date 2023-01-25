@@ -23,7 +23,7 @@ const useAuthCheck = () => {
       const response = await fetch(apiEndPoints.authCheck, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${user?.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken || user?.token}`,
         },
       });
 

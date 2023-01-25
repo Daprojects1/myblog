@@ -24,16 +24,21 @@ const LoginPage = () => {
     password: "",
   };
 
+  const handleSignIn = async (username, password) => {
+    try {
+      await signIn(username, password);
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
+  };
+
   const formik = useFormik({
     initialValues,
     onSubmit: async (val) => {
       const { username, password } = val;
-      try {
-        await signIn(username, password);
-      } catch (error) {
-        console.log(error);
-        toast.error(error);
-      }
+
+      handleSignIn(username, password);
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Please enter your username"),
@@ -89,6 +94,11 @@ const LoginPage = () => {
         />
         <div className="createAccount">
           <p>Dont have an accout yet ?</p>
+          <p
+            className="createAccLink"
+            onClick={() => handleSignIn("fakeAccount123", "Fakeaccount123!")}>
+            Guest Login
+          </p>
           <p
             className="createAccLink"
             onClick={() => handleReRoute("/register")}>
